@@ -73,6 +73,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 - create react app
 - configured tailwindCSS
+- router
+- header
+- login form
+- sign up form
 
 # Features
 
