@@ -7,14 +7,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/utils/userSlice";
+import { BG_IMG, USER_AVATAR } from "../utils/utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const email = useRef(null);
@@ -49,21 +49,19 @@ const Login = () => {
           // ...
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               // Profile updated!
               const { uid, email, displayName, photoURL } = auth.currentUser;
-                      dispatch(
-                        addUser({
-                          uid: uid,
-                          email: email,
-                          displayName: displayName,
-                          photoURL: photoURL,
-                        })
-                      );
-              navigate("/browse");
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
             })
             .catch((error) => {
               // An error occurred
@@ -91,8 +89,6 @@ const Login = () => {
           // eslint-disable-next-line no-unused-vars
           const user = userCredential.user;
           // ...
-          
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -108,10 +104,7 @@ const Login = () => {
     <div className="w-screen ">
       <Header />
       <div className="absolute w-screen ">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/154a9550-ce07-4e28-819c-63185dd849f8/web/IN-en-20250106-TRIFECTA-perspective_27b02e7c-f668-4639-9e82-1a5485084b2a_large.jpg"
-          alt="bg"
-        />
+        <img src={BG_IMG} alt="bg" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}

@@ -84,6 +84,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - create sign up user account
 - implement sign in user API
 - created redux store with userSlice
+- bugFix - sign up displayName and profilePicture update
+- bugFix - if the user is not logged in redirect/ browse to login page and vice-versa
+- unsuscribed to onAuthStateChanged callback
 
 # Features
 
