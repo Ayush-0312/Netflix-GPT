@@ -97,8 +97,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - update store with trailer video data
 - embedded the youtube video and make it autoplay and mute
 - tailwindCSS to make mainContainer look cool
-- created SecondaryContainer 
+- created SecondaryContainer
 - created MovieList and MovieCard
+- created different custom hooks for popular, topRated, upcoming movies
+- hid scrollbar with maintaining its functionality
 
 # Features
 
