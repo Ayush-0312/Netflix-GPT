@@ -101,6 +101,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - created MovieList and MovieCard
 - created different custom hooks for popular, topRated, upcoming movies
 - hid scrollbar with maintaining its functionality
+- GptSearch feature
+- 
 
 # Features
 

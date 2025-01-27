@@ -5,11 +5,13 @@ import { auth } from "../utils/utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/utils/userSlice";
 import { LOGO } from "../utils/utils/constants";
+import { toggleGptSearchView } from "../utils/utils/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -47,12 +49,27 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleGptSearchClick = () => {
+    //toggle GptSearchClick
+    dispatch(toggleGptSearchView());
+  };
+
   return (
     <div className="absolute w-screen px-12 py-4 bg-gradient-to-b from-black z-10 flex justify-between ">
       <img className="w-48" src={LOGO} alt="logo" />
       {user && (
         <div className="flex px-12 py-4">
-          <img className="w-10 h-10" src={user?.photoURL} alt="user-icon" />
+          <button
+            className="px-3 py-1 mx-4 my-2 bg-purple-700 text-white font-semibold rounded-md hover:bg-purple-800"
+            onClick={handleGptSearchClick}
+          >
+            {showGptSearch ? "Home" : "GPT Search"}
+          </button>
+          <img
+            className="w-10 h-10 mt-1"
+            src={user?.photoURL}
+            alt="user-icon"
+          />
           <button
             onClick={handleSignOut}
             className="px-2 font-bold text-white hover:underline"
