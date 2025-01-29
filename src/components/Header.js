@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/utils/userSlice";
-import { LOGO } from "../utils/utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/utils/constants";
 import { toggleGptSearchView } from "../utils/utils/gptSlice";
+import { changeLanguage } from "../utils/utils/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -54,11 +55,27 @@ const Header = () => {
     dispatch(toggleGptSearchView());
   };
 
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute w-screen px-12 py-4 bg-gradient-to-b from-black z-10 flex justify-between ">
       <img className="w-48" src={LOGO} alt="logo" />
       {user && (
         <div className="flex px-12 py-4">
+          {showGptSearch && (
+            <select
+              className="px-2 py-1 my-2 bg-gray-900 text-white rounded-md"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang?.identifier} value={lang?.identifier}>
+                  {lang?.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
             className="px-3 py-1 mx-4 my-2 bg-purple-700 text-white font-semibold rounded-md hover:bg-purple-800"
             onClick={handleGptSearchClick}

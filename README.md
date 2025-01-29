@@ -102,7 +102,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - created different custom hooks for popular, topRated, upcoming movies
 - hid scrollbar with maintaining its functionality
 - GptSearch feature
-- 
+- GptSearchBar
+- (Feature) multi-language feature in our app
 
 # Features
 
