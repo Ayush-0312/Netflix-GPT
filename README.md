@@ -104,6 +104,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - GptSearch feature
 - GptSearchBar
 - (Feature) multi-language feature in our app
+- setup OpenAI API
+- used OpenAI API to get movie suggestions
+- reused MovieList component to display the movies
+- created env file to protect api key
+- done minor changes to stop repeated API calls
 
 # Features
 
