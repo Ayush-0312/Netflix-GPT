@@ -24,10 +24,10 @@ const Browse = () => {
 
   if (showMovieVideoPage)
     return (
-      <>
+      <div>
         <Header />
         <MovieVideos />
-      </>
+      </div>
     );
 
   return (

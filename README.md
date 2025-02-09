@@ -115,6 +115,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - created Footer
 - setup play and more info button option in main container
 - fixed favicon
+- made the app responsive to different screens
 
 # Features
 

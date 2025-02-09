@@ -15,7 +15,7 @@ const MovieCard = ({ posterPath, movieId }) => {
 
   return (
     <div
-      className="m-2 w-52 pr-2 cursor-pointer hover:scale-105 transform transition duration-200 ease-in-out"
+      className="w-36 md:w-52 m-1 md:m-2 pr-1 md:pr-2 cursor-pointer md:hover:scale-105 transform transition duration-200 ease-in-out"
       onClick={handleMovieClick}
     >
       <img alt="Movie Poster" src={IMG_CDN_URL + posterPath} />

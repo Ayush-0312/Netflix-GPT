@@ -24,7 +24,7 @@ const Login = () => {
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
-  
+
   const handleButtonClick = () => {
     const message = checkValidData(
       email.current.value,
@@ -104,14 +104,18 @@ const Login = () => {
   return (
     <div className="w-screen">
       <Header />
-      <div className="absolute w-screen ">
-        <img src={BG_IMG} alt="bg" />
+      <div className="absolute ">
+        <img
+          className="h-screen object-cover md:w-screen"
+          src={BG_IMG}
+          alt="bg"
+        />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-12 bg-black bg-opacity-75 mt-24 mx-auto right-0 left-0 text-white rounded-lg"
+        className="w-[95%] md:w-3/12 absolute p-6 md:p-12 bg-black bg-opacity-75 mt-[50%] md:mt-24 mx-auto right-0 left-0 text-white rounded-lg"
       >
-        <h1 className="font-bold text-3xl py-4">
+        <h1 className="font-bold text-2xl md:text-3xl py-2 md:py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
@@ -136,7 +140,7 @@ const Login = () => {
         />
         <p className="text-red-500 font-medium">{errorMessage}</p>
         <button
-          className="p-2 my-5 w-full font-semibold bg-red-700 rounded-md"
+          className="p-2 my-3 md:my-5 w-full font-semibold bg-red-700 rounded-md"
           onClick={handleButtonClick}
         >
           {" "}

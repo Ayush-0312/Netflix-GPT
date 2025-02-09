@@ -12,7 +12,7 @@ import { hideMovieVideoPage } from "../utils/utils/moviesSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const user = useSelector((store) => store.user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   const showMovieVideoPage = useSelector(
@@ -70,15 +70,15 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen px-12 py-4 bg-gradient-to-b from-black z-10 flex justify-between ">
+    <div className="absolute w-screen px-12 py-3 md:py-4 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
       <img
-        className="w-48 cursor-pointer"
+        className="w-48 cursor-pointer mx-auto md:mx-0"
         src={LOGO}
         alt="logo"
         onClick={handleLogoClick}
       />
       {user && (
-        <div className="flex px-12 py-4">
+        <div className="flex justify-evenly md:px-12 py-1 md:py-4">
           {showGptSearch && (
             <select
               className="px-2 py-1 my-2 bg-gray-900 text-white rounded-md"
@@ -100,13 +100,13 @@ const Header = () => {
             </button>
           )}
           <img
-            className="w-10 h-10 mt-1"
+            className="w-0 h-0 md:w-10 md:h-10 mt-1 md:rounded-none rounded-md"
             src={user?.photoURL}
             alt="user-icon"
           />
           <button
             onClick={handleSignOut}
-            className="px-2 font-bold text-white hover:underline"
+            className="md:px-2 font-bold text-white hover:underline"
           >
             Sign Out
           </button>

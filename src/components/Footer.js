@@ -5,7 +5,7 @@ import { AVATAR, GITHUB, NETFLIX } from "../utils/utils/constants";
 
 const Footer = () => {
   return (
-    <footer className="relative bottom-0 w-screen z-10 py-8 px-4 bg-black text-gray-400">
+    <footer className="relative bottom-0 w-screen z-10 py-4 md:py-8 md:px-4 bg-black text-gray-400">
       <div className="container mx-auto flex justify-between items-center px-6">
         <p className="text-lg font-medium">NETFLIX-GPT</p>
         <div className="flex space-x-4">
