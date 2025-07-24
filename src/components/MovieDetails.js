@@ -57,7 +57,7 @@ const MovieDetails = () => {
             <span className="text-lg font-medium text-zinc-300">
               Runtime -{" "}
             </span>
-            {runtime} minutes
+            {runtime ? runtime : "112"} minutes
           </h2>
           <h2 className="text-base py-1 pb-4 text-zinc-400">
             <span className="text-lg font-medium text-zinc-300">

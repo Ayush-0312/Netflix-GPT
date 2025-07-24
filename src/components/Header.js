@@ -81,7 +81,7 @@ const Header = () => {
         <div className="flex justify-evenly md:px-12 py-1 md:py-4">
           {showGptSearch && (
             <select
-              className="px-2 py-1 my-2 bg-gray-900 text-white rounded-md"
+              className="px-2 py-1 my-2 cursor-pointer bg-gray-900 text-white rounded-md"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (

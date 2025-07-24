@@ -14,6 +14,7 @@ import { BG_IMG, USER_AVATAR } from "../utils/utils/constants";
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -23,6 +24,7 @@ const Login = () => {
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+    setErrorMessage("");
   };
 
   const handleButtonClick = () => {
@@ -34,6 +36,8 @@ const Login = () => {
     setErrorMessage(message);
 
     if (message) return; //if message is present return from here
+
+    setLoading(true);
 
     // sign in / sign up logic
 
@@ -63,12 +67,14 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
+              setLoading(false);
             })
             .catch((error) => {
               // An error occurred
               // ...
               setErrorMessage(error.message);
             });
+          setLoading(false);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -77,6 +83,7 @@ const Login = () => {
           setErrorMessage(
             "Invalid Email/Password...   " + errorCode + " " + errorMessage
           );
+          setLoading(false);
         });
     } else {
       // sign in logic
@@ -90,6 +97,7 @@ const Login = () => {
           // eslint-disable-next-line no-unused-vars
           const user = userCredential.user;
           // ...
+          setLoading(false);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -97,6 +105,7 @@ const Login = () => {
           setErrorMessage(
             "Invalid Email/Password...   " + errorCode + " " + errorMessage
           );
+          setLoading(false);
         });
     }
   };
@@ -140,11 +149,36 @@ const Login = () => {
         />
         <p className="text-red-500 font-medium">{errorMessage}</p>
         <button
-          className="p-2 my-3 md:my-5 w-full font-semibold bg-red-700 rounded-md"
+          className="p-2 my-3 md:my-5 flex justify-center items-center w-full font-semibold bg-red-700 rounded-md"
           onClick={handleButtonClick}
+          disabled={loading}
         >
-          {" "}
-          {isSignInForm ? "Sign In" : "Sign Up"}
+          {loading ? (
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+              ></path>
+            </svg>
+          ) : isSignInForm ? (
+            "Sign In"
+          ) : (
+            "Sign Up"
+          )}
         </button>
         <div>
           <p className="text-gray-300">

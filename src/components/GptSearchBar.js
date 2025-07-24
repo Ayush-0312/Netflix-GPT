@@ -33,7 +33,7 @@ const GptSearchBar = () => {
     const gptQuery =
       "Act as a movie Recommendation system and suggest some movies for the query:" +
       searchText?.current?.value +
-      ". Only give me names of 5 movies, comma seperated like the examble result given ahead. Example Result: Gadar, Avengers, Sholay, Thor Ragnarok, Koi Mil Gaya";
+      ". Only give me names of 5 movies including the name of the movie if avaliable, comma seperated like the examble result given ahead. Example Result: Gadar, Avengers, Sholay, Thor Ragnarok, Koi Mil Gaya";
 
     const gptResult = await client.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
@@ -71,7 +71,7 @@ const GptSearchBar = () => {
           placeholder={lang[langKey]?.gptSearchPlaceholder}
         />
         <button
-          className="p-3 my-3 mr-3 font-semibold bg-red-700 hover:bg-red-600 text-white col-span-3 rounded-md"
+          className="p-3 my-3 mr-3 flex justify-center items-center font-semibold bg-red-700 hover:bg-red-600 text-white col-span-3 rounded-md"
           onClick={handleGptSearchClick}
         >
           {loading ? (
