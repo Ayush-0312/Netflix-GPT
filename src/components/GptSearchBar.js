@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/utils/languageConstants";
-import client from "../utils/utils/openai";
+// import client from "../utils/utils/openai";
 import { API_OPTIONS } from "../utils/utils/constants";
 import { addGptMovieResult } from "../utils/utils/gptSlice";
+import { GoogleGenAI } from "@google/genai";
 
 const GptSearchBar = () => {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,10 @@ const GptSearchBar = () => {
 
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
+
+  const ai = new GoogleGenAI({
+    apiKey: process.env.REACT_APP_GEMINI_KEY,
+  });
 
   //search movie in TMDB database
   const searchMovieTMDB = async (movie) => {
@@ -35,14 +40,28 @@ const GptSearchBar = () => {
       searchText?.current?.value +
       ". Only give me names of 5 movies including the name of the movie if avaliable, comma seperated like the examble result given ahead. Example Result: Gadar, Avengers, Sholay, Thor Ragnarok, Koi Mil Gaya";
 
-    const gptResult = await client.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-4o-mini",
+    // const gptResult = await client.chat.completions.create({
+    //   messages: [{ role: "user", content: gptQuery }],
+    //   model: "gpt-4o-mini",
+    // });
+
+    const gptResult = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: gptQuery }],
+        },
+      ],
     });
+    // console.log(gptResult);
+
+    const gptMovies =
+      gptResult?.candidates[0]?.content?.parts[0]?.text.split(",");
 
     //console.log(gptResult.choices[0]?.message?.content);
     //Chupke Chupke, Gol Maal, Chhoti Si Baat, Pati Patni Aur Woh, Rang De Basanti
-    const gptMovies = gptResult.choices[0]?.message?.content.split(",");
+    // const gptMovies = gptResult.choices[0]?.message?.content.split(",");
     //console.log(gptMovies);
     //["Chupke Chupke", "Gol Maal", "Chhoti Si Baat", "Pati Patni Aur Woh", "Rang De Basanti"]
 

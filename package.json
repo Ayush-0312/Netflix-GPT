@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@google/genai": "^1.29.1",
     "cra-template": "1.2.0",
     "firebase": "^11.1.0",
     "openai": "^4.81.0",
