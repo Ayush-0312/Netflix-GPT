@@ -72,7 +72,7 @@ const Header = () => {
   return (
     <div className="absolute w-screen px-12 py-3 md:py-4 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
       <img
-        className="w-48 cursor-pointer mx-auto md:mx-0"
+        className="w-32 h-11 cursor-pointer mx-auto md:mx-0"
         src={LOGO}
         alt="logo"
         onClick={handleLogoClick}
