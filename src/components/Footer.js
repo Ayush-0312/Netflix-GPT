@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="relative bottom-0 w-screen z-10 py-4 md:py-8 md:px-4 bg-black text-gray-400">
       <div className="container mx-auto flex justify-between items-center px-6">
-        <p className="text-lg font-medium">NETFLIX-GPT</p>
+        <p className="text-lg font-medium">CINEMIX</p>
         <div className="flex space-x-4">
           <img
             className="w-6 rounded-full cursor-pointer"
@@ -27,7 +27,12 @@ const Footer = () => {
           >
             <FaGithub size={30} />
           </a>
-          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
+          <a
+            href={LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-300"
+          >
             <FaLinkedin size={30} />
           </a>
           {/* <a

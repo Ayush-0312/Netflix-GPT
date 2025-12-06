@@ -1,5 +1,4 @@
-export const LOGO =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1198px-Netflix_2015_logo.svg.png?20190206123158";
+export const LOGO = "/cinemix.png";
 
 export const USER_AVATAR =
   "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg";
@@ -32,6 +31,6 @@ export const GITHUB = "https://github.com/Ayush-0312";
 export const LINKEDIN =
   "https://www.linkedin.com/in/ayush-gupta-41484b234?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app";
 
-export const PORTFOLIO = "https://www.theayushgupta.in/";  
+export const PORTFOLIO = "https://www.theayushgupta.in/";
 
 export const NETFLIX = "https://www.netflix.com/in/";
