@@ -1,7 +1,8 @@
-# Netflix-GPT
+# Cinemix
 
-A smart movie recommendation platform using ChatGPT to suggest trending and personalized content.
-live- https://netflix.theayushgupta.in/
+A smart movie recommendation platform using AI to suggest trending and personalized content.
+
+## live- https://cinemix.theayushgupta.in/
 
 - create react app
 - configured tailwindCSS
@@ -49,7 +50,7 @@ live- https://netflix.theayushgupta.in/
 - fixed favicon
 - made the app responsive to different screens
 
-# Features
+## Features
 
 - login / sign up
 
@@ -65,7 +66,7 @@ live- https://netflix.theayushgupta.in/
   - movie suggestion
     - movieList \* n
 
-- Netflix-GPT
+- Cinemix
 
   - search bar
   - movie suggestions
