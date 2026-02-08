@@ -1,17 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import { IMG_CDN_URL } from "../utils/utils/constants";
+import { useParams } from "react-router-dom";
 import useMovieDetails from "../hooks/useMovieDetails";
-import useMovieVideos from "../hooks/useMovieVideos";
 
 const MovieDetails = () => {
-  const movieId = useSelector((store) => store?.movies?.movieId);
-  const movieDetails = useSelector((store) => store?.movies?.movieDetails);
+  const { movieId } = useParams();
+  const movieDetails = useMovieDetails(movieId);
 
-  useMovieDetails(movieId);
-  useMovieVideos(movieId);
-
-  if (!movieDetails) return;
+  if (!movieDetails) return null;
 
   const {
     title,
@@ -27,7 +22,6 @@ const MovieDetails = () => {
   const genresName = genres.map((genre) => genre.name).join(", ");
 
   return (
-    //w-[98%] md:w-9/12 mx-auto right-0 left-0 bg-black bg-opacity-90 text-white md:grid md:grid-cols-12
     <div className="pt-[35%] md:pt-[9%] text-white">
       <div className="md:w-9/12 bg-black bg-opacity-90 mx-auto right-0 left-0 md:grid md:grid-cols-12">
         <div className="md:m-4 md:col-span-3">

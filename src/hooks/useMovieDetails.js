@@ -1,24 +1,34 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/utils/constants";
-import { useDispatch } from "react-redux";
-import { addMovieDetails } from "../utils/utils/moviesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addMovieDetailsToStore } from "../utils/utils/moviesSlice";
 
 const useMovieDetails = (movieId) => {
   const dispatch = useDispatch();
 
-  const getMovieDetails = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/" + movieId + "?language=en-US",
-      API_OPTIONS
-    );
-    const json = await data.json();
+  const cachedData = useSelector(
+    (store) => store.movies.movieDetailsMap[movieId],
+  );
 
-    dispatch(addMovieDetails(json));
-  };
   useEffect(() => {
-    getMovieDetails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!movieId) return;
+
+    if (cachedData) return;
+
+    async function fetchDetails() {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+        API_OPTIONS,
+      );
+      const data = await res.json();
+
+      dispatch(addMovieDetailsToStore({ movieId, details: data }));
+    }
+
+    fetchDetails();
+  }, [movieId, cachedData, dispatch]);
+
+  return cachedData;
 };
 
 export default useMovieDetails;

@@ -1,23 +1,18 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../utils/utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/utils/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utils/utils/constants";
-import { toggleGptSearchView } from "../utils/utils/gptSlice";
 import { changeLanguage } from "../utils/utils/configSlice";
-import { hideMovieVideoPage } from "../utils/utils/moviesSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const user = useSelector((store) => store.user);
-  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
-  const showMovieVideoPage = useSelector(
-    (store) => store.movies.movieVideoPage
-  );
 
   const handleSignOut = () => {
     signOut(auth)
@@ -42,32 +37,32 @@ const Header = () => {
             email: email,
             displayName: displayName,
             photoURL: photoURL,
-          })
+          }),
         );
-        navigate("/browse");
+        if (location.pathname === "/") {
+          navigate("/browse");
+        }
       } else {
         // User is signed out
         dispatch(removeUser());
-        navigate("/");
+        if (location.pathname !== "/") {
+          navigate("/");
+        }
       }
     });
-    return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const handleGptSearchClick = () => {
-    //toggle GptSearchClick
-    dispatch(toggleGptSearchView());
-  };
+    return () => unsubscribe();
+  }, [dispatch, location.pathname, navigate]);
 
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
 
   const handleLogoClick = () => {
-    dispatch(hideMovieVideoPage());
     navigate("/browse");
   };
+
+  const isAiPage = location.pathname.startsWith("/ai");
 
   return (
     <div className="absolute w-screen px-12 py-3 md:py-4 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
@@ -79,7 +74,7 @@ const Header = () => {
       />
       {user && (
         <div className="flex justify-evenly md:px-12 py-1 md:py-4">
-          {showGptSearch && (
+          {isAiPage && (
             <select
               className="px-2 py-1 my-2 cursor-pointer bg-gray-900 text-white rounded-md"
               onChange={handleLanguageChange}
@@ -91,14 +86,14 @@ const Header = () => {
               ))}
             </select>
           )}
-          {!showMovieVideoPage && (
-            <button
-              className="px-3 py-1 mx-4 my-2 bg-purple-700 text-white font-semibold rounded-md hover:bg-purple-800"
-              onClick={handleGptSearchClick}
-            >
-              {showGptSearch ? "Home" : "AI Search"}
-            </button>
-          )}
+
+          <button
+            className="px-3 py-1 mx-4 my-2 bg-purple-700 text-white font-semibold rounded-md hover:bg-purple-800"
+            onClick={() => navigate(isAiPage ? "/browse" : "/ai")}
+          >
+            {isAiPage ? "Home" : "AI Search"}
+          </button>
+
           <img
             className="w-0 h-0 md:w-10 md:h-10 mt-1 md:rounded-none rounded-md"
             src={user?.photoURL}

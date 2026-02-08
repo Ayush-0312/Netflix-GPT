@@ -1,16 +1,9 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { setMovieId, showMovieVideoPage } from "../utils/utils/moviesSlice";
+import { useNavigate } from "react-router-dom";
 
 const VideoTitle = ({ title, overview, movieId }) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (!movieId) return;
-
-  const handleMovieClick = () => {
-    dispatch(showMovieVideoPage());
-    dispatch(setMovieId(movieId));
-  };
 
   return (
     <div className="w-screen aspect-video pt-16 md:pt-60 px-5 md:px-16 text-white absolute bg-gradient-to-r from-black">
@@ -20,15 +13,8 @@ const VideoTitle = ({ title, overview, movieId }) => {
       </p>
       <div>
         <button
-          className="bg-gray-500 my-1 md:my-0 p-1 px-2 md:p-3 md:px-6 md:font-medium md:text-lg rounded-md bg-opacity-50 md:hover:bg-opacity-80"
-          onClick={handleMovieClick}
-        >
-          {" "}
-          ▶ Play
-        </button>
-        <button
-          className="hidden md:inline-block bg-gray-500 mx-2 p-3 px-6 font-medium text-lg rounded-md bg-opacity-50 hover:bg-opacity-80"
-          onClick={handleMovieClick}
+          className="hidden md:inline-block bg-gray-500 p-3 px-6 font-medium text-lg rounded-md bg-opacity-50 hover:bg-opacity-80"
+          onClick={() => navigate(`/movie/${movieId}`)}
         >
           {" "}
           More Info
