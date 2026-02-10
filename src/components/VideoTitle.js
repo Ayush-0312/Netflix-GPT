@@ -3,17 +3,21 @@ import { useNavigate } from "react-router-dom";
 const VideoTitle = ({ title, overview, movieId }) => {
   const navigate = useNavigate();
 
-  if (!movieId) return;
+  if (!movieId) return null;
 
   return (
-    <div className="w-screen aspect-video pt-16 md:pt-60 px-5 md:px-16 text-white absolute bg-gradient-to-r from-black">
-      <h1 className="text-2xl md:text-6xl font-bold md:w-1/2"> {title}</h1>
-      <p className="hidden md:inline-block py-5 text-lg w-1/3 text-gray-400">
-        {overview}
-      </p>
-      <div>
+    <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-16 pb-24 md:pb-32 text-neutral-50 max-w-2xl">
+      <h1 className="text-3xl md:text-6xl font-extrabold drop-shadow-xl leading-tight">
+        {title}
+      </h1>
+      <p className="hidden md:block text-lg mt-4 text-gray-200">{overview}</p>
+
+      <div className="flex mt-6 gap-3">
         <button
-          className="hidden md:inline-block bg-gray-500 p-3 px-6 font-medium text-lg rounded-md bg-opacity-50 hover:bg-opacity-80"
+          className="bg-gray-500 bg-opacity-60 text-neutral-50 font-semibold
+            px-6 py-2 md:px-8 md:py-3 rounded-md
+            text-sm md:text-lg
+            hover:bg-opacity-80 transition"
           onClick={() => navigate(`/movie/${movieId}`)}
         >
           {" "}

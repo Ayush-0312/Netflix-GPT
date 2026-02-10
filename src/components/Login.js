@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/utils/validate";
 import {
@@ -31,7 +31,7 @@ const Login = () => {
     const message = checkValidData(
       email.current.value,
       password.current.value,
-      isSignInForm ? undefined : name.current.value
+      isSignInForm ? undefined : name.current.value,
     );
     setErrorMessage(message);
 
@@ -46,7 +46,7 @@ const Login = () => {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value
+        password.current.value,
       )
         .then((userCredential) => {
           // Signed up
@@ -65,7 +65,7 @@ const Login = () => {
                   email: email,
                   displayName: displayName,
                   photoURL: photoURL,
-                })
+                }),
               );
               setLoading(false);
             })
@@ -81,7 +81,7 @@ const Login = () => {
           const errorMessage = error.message;
           // ..
           setErrorMessage(
-            "Invalid Email/Password...   " + errorCode + " " + errorMessage
+            "Invalid Email/Password...   " + errorCode + " " + errorMessage,
           );
           setLoading(false);
         });
@@ -90,7 +90,7 @@ const Login = () => {
       signInWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value
+        password.current.value,
       )
         .then((userCredential) => {
           // Signed in
@@ -103,7 +103,7 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(
-            "Invalid Email/Password...   " + errorCode + " " + errorMessage
+            "Invalid Email/Password...   " + errorCode + " " + errorMessage,
           );
           setLoading(false);
         });
@@ -111,87 +111,92 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen">
-      <Header />
-      <div className="absolute ">
-        <img
-          className="h-screen object-cover md:w-screen"
-          src={BG_IMG}
-          alt="bg"
-        />
+    <div className="relative w-screen h-screen overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <img src={BG_IMG} alt="bg" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="w-[95%] md:w-3/12 absolute p-6 md:p-12 bg-black bg-opacity-75 mt-[50%] md:mt-24 mx-auto right-0 left-0 text-white rounded-lg"
-      >
-        <h1 className="font-bold text-2xl md:text-3xl py-2 md:py-4">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </h1>
-        {!isSignInForm && (
-          <input
-            ref={name}
-            type="text"
-            placeholder="Name"
-            className="p-3 my-2 w-full bg-black bg-opacity-60 rounded-md"
-          />
-        )}
-        <input
-          ref={email}
-          type="text"
-          placeholder="Email Address"
-          className="p-3 my-2 w-full bg-black bg-opacity-60 rounded-md"
-        />
-        <input
-          ref={password}
-          type="password"
-          placeholder="Password"
-          className="p-3 my-2 w-full bg-black bg-opacity-60 rounded-md"
-        />
-        <p className="text-red-500 font-medium">{errorMessage}</p>
-        <button
-          className="p-2 my-3 md:my-5 flex justify-center items-center w-full font-semibold bg-red-700 rounded-md"
-          onClick={handleButtonClick}
-          disabled={loading}
+
+      <Header />
+
+      <div className="flex items-center justify-center h-full px-4">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="w-full max-w-sm bg-black/70 backdrop-blur-sm p-6 md:p-10 rounded-lg text-neutral-50 shadow-xl"
         >
-          {loading ? (
-            <svg
-              className="animate-spin h-5 w-5 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
-              ></path>
-            </svg>
-          ) : isSignInForm ? (
-            "Sign In"
-          ) : (
-            "Sign Up"
+          <h1 className="font-bold text-3xl mb-6">
+            {isSignInForm ? "Sign In" : "Sign Up"}
+          </h1>
+          {!isSignInForm && (
+            <input
+              ref={name}
+              type="text"
+              placeholder="Name"
+              className="p-3 mb-4 w-full bg-neutral-900 rounded-md outline-none focus:ring-1 focus:ring-red-600"
+            />
           )}
-        </button>
-        <div>
-          <p className="text-gray-300">
-            {isSignInForm ? "New to Netflix? " : "Already a user? "}{" "}
-            <span
-              className="font-bold cursor-pointer hover:underline text-white"
-              onClick={toggleSignInForm}
-            >
-              {isSignInForm ? "Sign up now." : "Sign in now."}
-            </span>
-          </p>
-        </div>
-      </form>
+          <input
+            ref={email}
+            type="text"
+            placeholder="Email Address"
+            className="p-3 mb-4 w-full bg-neutral-900 rounded-md outline-none focus:ring-1 focus:ring-red-600"
+          />
+          <input
+            ref={password}
+            type="password"
+            placeholder="Password"
+            className="p-3 mb-2 w-full bg-neutral-900 rounded-md outline-none focus:ring-1 focus:ring-red-600"
+          />
+
+          {errorMessage && (
+            <p className="text-red-500 text-sm mb-3">{errorMessage}</p>
+          )}
+
+          <button
+            className="w-full py-2 mt-2 bg-red-700 hover:bg-red-600 rounded-md font-semibold flex items-center justify-center"
+            onClick={handleButtonClick}
+            disabled={loading}
+          >
+            {loading ? (
+              <svg
+                className="animate-spin h-5 w-5 text-neutral-50"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+                ></path>
+              </svg>
+            ) : isSignInForm ? (
+              "Sign In"
+            ) : (
+              "Sign Up"
+            )}
+          </button>
+          <div>
+            <p className="text-gray-300 text-sm mt-6">
+              {isSignInForm ? "New to CINEMIX? " : "Already have an account? "}
+              <span
+                className="font-bold cursor-pointer hover:underline text-neutral-50"
+                onClick={toggleSignInForm}
+              >
+                {isSignInForm ? "Sign up now." : "Sign in now."}
+              </span>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

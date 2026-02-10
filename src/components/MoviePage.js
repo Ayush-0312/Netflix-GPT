@@ -4,19 +4,21 @@ import MovieVideos from "./MovieVideos";
 
 const MoviePage = () => {
   return (
-    <>
-      <div className="fixed w-screen -z-10">
+    <div className="relative min-h-screen text-neutral-50">
+      <div className="fixed inset-0 -z-10">
         <img
-          className="h-screen object-cover md:w-screen"
           src={BG_IMG}
-          alt="bg"
+          className="w-full h-full object-cover"
+          alt="movie backdrop"
         />
+        <div className="absolute inset-0 bg-black/70"></div>
       </div>
-      <div>
+
+      <div className="pt-[20vh] md:px-20 pb-20">
         <MovieDetails />
         <MovieVideos />
       </div>
-    </>
+    </div>
   );
 };
 

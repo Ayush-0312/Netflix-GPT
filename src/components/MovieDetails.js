@@ -19,49 +19,49 @@ const MovieDetails = () => {
     vote_count,
   } = movieDetails;
 
-  const genresName = genres.map((genre) => genre.name).join(", ");
-
   return (
-    <div className="pt-[35%] md:pt-[9%] text-white">
-      <div className="md:w-9/12 bg-black bg-opacity-90 mx-auto right-0 left-0 md:grid md:grid-cols-12">
-        <div className="md:m-4 md:col-span-3">
+    <section className="max-w-5xl mx-auto mb-12 px-4 md:px-0">
+      <div className="flex items-center flex-col md:flex-row gap-6 md:gap-10">
+        <div className="md:w-1/3 flex justify-center md:justify-start">
           <img
-            className="w-80 pt-4 md:py-0 md:mx-0 mx-auto right-0 left-0"
-            alt="Movie Poster"
             src={IMG_CDN_URL + poster_path}
+            alt={title}
+            className="w-52 md:w-64 rounded-lg shadow-xl"
           />
         </div>
-        <div className="my-4 m-4 md:ml-1 md:col-span-9">
-          <h1 className="text-4xl font-medium pb-1">{title} </h1>
-          <h2 className="text-base py-1 text-zinc-400">
-            {"⭐"}
-            {vote_average} ({vote_count})
-          </h2>
-          <h2 className="text-base py-1 text-zinc-400">
-            <span className="text-lg font-medium text-zinc-300">Genres - </span>
-            {genresName}
-          </h2>
-          <h2 className="text-base py-1 text-zinc-400">
-            <span className="text-lg font-medium text-zinc-300">
-              Overview -{" "}
+
+        <div className="md:w-2/3 text-neutral-200 flex flex-col gap-3">
+          <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
+
+          <p className="text-lg">
+            ⭐ {vote_average}{" "}
+            <span className="text-neutral-400 text-base">
+              ({vote_count} reviews)
             </span>
-            {overview}{" "}
-          </h2>
-          <h2 className="text-base py-1 text-zinc-400">
-            <span className="text-lg font-medium text-zinc-300">
-              Runtime -{" "}
-            </span>
-            {runtime ? runtime : "112"} minutes
-          </h2>
-          <h2 className="text-base py-1 pb-4 text-zinc-400">
-            <span className="text-lg font-medium text-zinc-300">
-              Release date -{" "}
-            </span>
+          </p>
+
+          <p className="text-base md:text-lg">
+            <span className="font-semibold text-neutral-50">Genres:</span>{" "}
+            {genres.map((g) => g.name).join(", ")}
+          </p>
+
+          <p className="text-base md:text-lg">
+            <span className="font-semibold text-neutral-50">Runtime:</span>{" "}
+            {runtime} min
+          </p>
+
+          <p className="text-base md:text-lg">
+            <span className="font-semibold text-neutral-50">Release Date:</span>{" "}
             {release_date}
-          </h2>
+          </p>
+
+          <p className="text-base md:text-lg">
+            <span className="font-semibold text-neutral-50">Synopsis:</span>{" "}
+            {overview}
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,25 +1,22 @@
-import React from "react";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
-  if (!movies) return;
+  if (!movies) return null;
 
   return (
-    <div className="px-4 md:px-6">
-      <h1 className="py-2 pl-2 md:py-4 md:pl-10 text-lg md:text-3xl font-medium md:font-semibold text-white">
-        {" "}
+    <div className="mb-6 last:mb-0">
+      <h1 className="text-neutral-100 text-xl md:text-3xl font-bold px-4 md:px-10 mb-4">
         {title}
       </h1>
-      <div className="flex overflow-x-auto scrollbar-hidden pl-2 md:pl-10 snap-x snap-mandatory">
-        <div className="flex">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie?.id}
-              posterPath={movie?.poster_path}
-              movieId={movie?.id}
-            />
-          ))}
-        </div>
+
+      <div className="flex gap-2 md:gap-4 overflow-x-auto px-4 md:px-10 pb-2 scrollbar-hidden">
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            movieId={movie.id}
+            posterPath={movie.poster_path}
+          />
+        ))}
       </div>
     </div>
   );

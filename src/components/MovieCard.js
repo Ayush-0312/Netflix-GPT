@@ -7,9 +7,13 @@ const MovieCard = ({ posterPath, movieId }) => {
   return (
     <Link
       to={`/movie/${movieId}`}
-      className="w-36 md:w-52 m-1 md:m-2 pr-1 md:pr-2 cursor-pointer md:hover:scale-105 transform transition duration-200 ease-in-out"
+      className="block w-28 md:w-40 lg:w-48 flex-shrink-0 transform transition-transform duration-300 hover:scale-[1.03]"
     >
-      <img alt="Movie Poster" src={IMG_CDN_URL + posterPath} />
+      <img
+        alt="Movie Poster"
+        src={IMG_CDN_URL + posterPath}
+        className=" w-full h-full object-cover rounded-sm transition-opacity duration-300"
+      />
     </Link>
   );
 };

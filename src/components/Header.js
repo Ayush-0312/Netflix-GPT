@@ -13,6 +13,7 @@ const Header = () => {
   const location = useLocation();
 
   const user = useSelector((store) => store.user);
+  const isAiPage = location.pathname === "/ai";
 
   const handleSignOut = () => {
     signOut(auth)
@@ -62,21 +63,20 @@ const Header = () => {
     navigate("/browse");
   };
 
-  const isAiPage = location.pathname.startsWith("/ai");
-
   return (
-    <div className="absolute w-screen px-12 py-3 md:py-4 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+    <div className="fixed top-0 left-0 w-full z-40 bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm px-2 md:px-12 py-2 flex items-center justify-between">
       <img
-        className="h-16 cursor-pointer mx-auto md:mx-0"
         src={LOGO}
         alt="logo"
+        loading="lazy"
+        className="h-10 md:h-16 cursor-pointer select-none"
         onClick={handleLogoClick}
       />
       {user && (
-        <div className="flex justify-evenly md:px-12 py-1 md:py-4">
+        <div className="flex items-center gap-3 md:gap-6">
           {isAiPage && (
             <select
-              className="px-2 py-1 my-2 cursor-pointer bg-gray-900 text-white rounded-md"
+              className="px-3 py-1 text-sm bg-black/70 text-neutral-50 rounded border border-white/20 outline-none cursor-pointer hover:bg-black/90 transition"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
@@ -88,20 +88,20 @@ const Header = () => {
           )}
 
           <button
-            className="px-3 py-1 mx-4 my-2 bg-purple-700 text-white font-semibold rounded-md hover:bg-purple-800"
+            className=" px-4 py-1.5 md:px-6 md:py-2 rounded-md text-sm md:text-base bg-red-600 hover:bg-red-700 active:scale-95 font-semibold text-neutral-50 transition"
             onClick={() => navigate(isAiPage ? "/browse" : "/ai")}
           >
             {isAiPage ? "Home" : "AI Search"}
           </button>
 
           <img
-            className="w-0 h-0 md:w-10 md:h-10 mt-1 md:rounded-none rounded-md"
+            className="hidden md:block w-10 h-10 rounded-md object-cover border border-white/30"
             src={user?.photoURL}
             alt="user-icon"
           />
           <button
             onClick={handleSignOut}
-            className="md:px-2 font-bold text-white hover:underline"
+            className="text-neutral-50 text-sm md:text-base font-medium hover:underline hover:text-gray-200 transition"
           >
             Sign Out
           </button>

@@ -7,22 +7,26 @@ const MovieVideos = () => {
   const videos = useMovieVideos(movieId);
 
   return (
-    <div>
-      <div className=" bg-black bg-opacity-90 text-white md:w-9/12 md:my-10 mx-auto left-0 right-0">
-        {videos?.length ? (
-          videos.map((movie, index) => (
+    <section className="max-w-6xl mx-auto mt-14 px-4 md:px-0">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-neutral-50">
+        Videos
+      </h2>
+
+      {videos?.length ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {videos.map((v) => (
             <MovieVideoList
-              key={index}
-              name={movie?.name}
-              type={movie?.type}
-              videoKey={movie?.key}
+              key={v.key}
+              name={v.name}
+              type={v.type}
+              videoKey={v.key}
             />
-          ))
-        ) : (
-          <p className="text-center py-4">No videos available</p>
-        )}
-      </div>
-    </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-neutral-400">No videos available</p>
+      )}
+    </section>
   );
 };
 

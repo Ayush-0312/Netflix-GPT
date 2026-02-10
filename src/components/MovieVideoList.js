@@ -1,24 +1,23 @@
-import React from "react";
-
 const MovieVideoList = ({ name, type, videoKey }) => {
-  if (!name) return;
+  if (!name) return null;
 
   return (
-    <div className="p-2 md:grid md:grid-cols-12">
-      <div className="md:m-2 md:col-span-6">
-        <iframe
-          className="w-full h-60 md:h-72"
-          src={"https://www.youtube.com/embed/" + videoKey + "?rel=0"}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
-      </div>
-      <div className="m-2 md:col-span-6">
-        <h1 className="md:text-2xl font-medium">{name} </h1>
-        <h2 className="py-1 md:text-base text-zinc-400">( {type} ) </h2>
+    <div className="bg-black/40 rounded-lg overflow-hidden shadow-lg border border-white/10">
+      <iframe
+        className="w-full h-60 md:h-64"
+        src={`https://www.youtube.com/embed/${videoKey}?rel=0`}
+        title={name}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+
+      <div className="p-4">
+        <h1 className="text-lg md:text-xl font-semibold text-neutral-50 leading-tight">
+          {name}
+        </h1>
+
+        <p className="text-neutral-400 mt-1 text-sm md:text-base">{type}</p>
       </div>
     </div>
   );

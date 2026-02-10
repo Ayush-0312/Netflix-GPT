@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/utils/languageConstants";
 // import client from "../utils/utils/openai";
@@ -8,6 +8,7 @@ import { GoogleGenAI } from "@google/genai";
 
 const GptSearchBar = () => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   const langKey = useSelector((store) => store.config.lang);
@@ -23,7 +24,7 @@ const GptSearchBar = () => {
       "https://api.themoviedb.org/3/search/movie?query=" +
         movie +
         "&include_adult=false&language=en-US&page=1",
-      API_OPTIONS
+      API_OPTIONS,
     );
     const json = await data.json();
 
@@ -31,6 +32,14 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
+    const query = searchText?.current?.value?.trim();
+
+    if (!query) {
+      setError("Search is required");
+      return;
+    }
+
+    setError("");
     setLoading(true);
 
     // make an API call to GPT API and get movie result
@@ -71,35 +80,41 @@ const GptSearchBar = () => {
     const tmdbResults = await Promise.all(promiseArray);
     //console.log(tmdbResults);
     dispatch(
-      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
+      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults }),
     );
 
     setLoading(false);
   };
 
   return (
-    <div className="pt-[45%] md:pt-[9%] md:pb-4 flex justify-center">
+    <div className="w-full md:w-3/4 lg:w-1/2">
       <form
-        className=" bg-black bg-opacity-90 w-[98%] md:w-1/2 grid grid-cols-12 rounded-md"
+        className="bg-black/40 backdrop-blur-md border border-white/10 rounded-xl p-3 flex flex-col md:flex-row gap-3"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
           ref={searchText}
-          className=" p-3 my-3 mx-3 col-span-9 rounded-md"
+          onChange={() => setError("")}
+          className={`flex-grow px-3 py-2 rounded-lg bg-neutral-900/70 text-neutral-50 placeholder-neutral-400 outline-none text-sm md:text-base ${error ? "border border-red-500" : ""}`}
           type="text"
-          placeholder={lang[langKey]?.gptSearchPlaceholder}
+          placeholder={
+            error ? "Required*" : lang[langKey]?.gptSearchPlaceholder
+          }
         />
+
         <button
-          className="p-3 my-3 mr-3 flex justify-center items-center font-semibold bg-red-700 hover:bg-red-600 text-white col-span-3 rounded-md"
+          className="px-4 py-2 bg-red-700 hover:bg-red-600 text-neutral-50 font-semibold rounded-lg flex items-center justify-center whitespace-nowrap text-sm md:text-base"
           onClick={handleGptSearchClick}
         >
           {loading ? (
-            <div className="w-6 h-6 border-t-4 border-b-4 border-red-600 border-solid rounded-full animate-spin"></div>
+            <div className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></div>
           ) : (
             lang[langKey]?.search
           )}
         </button>
       </form>
+
+      {error && <p className="text-red-500 text-sm mt-2 px-1">{error}</p>}
     </div>
   );
 };
