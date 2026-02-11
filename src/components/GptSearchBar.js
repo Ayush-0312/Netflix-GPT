@@ -97,9 +97,7 @@ const GptSearchBar = () => {
           onChange={() => setError("")}
           className={`flex-grow px-3 py-2 rounded-lg bg-neutral-900/70 text-neutral-50 placeholder-neutral-400 outline-none text-sm md:text-base ${error ? "border border-red-500" : ""}`}
           type="text"
-          placeholder={
-            error ? "Required*" : lang[langKey]?.gptSearchPlaceholder
-          }
+          placeholder={lang[langKey]?.gptSearchPlaceholder}
         />
 
         <button

@@ -1,6 +1,7 @@
 import MovieVideoList from "./MovieVideoList";
 import { useParams } from "react-router-dom";
 import useMovieVideos from "../hooks/useMovieVideos";
+import VideoListShimmer from "./Shrimmers/VideoListShimmer";
 
 const MovieVideos = () => {
   const { movieId } = useParams();
@@ -12,7 +13,16 @@ const MovieVideos = () => {
         Videos
       </h2>
 
-      {videos?.length ? (
+      {!videos && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <VideoListShimmer />
+          <VideoListShimmer />
+          <VideoListShimmer />
+          <VideoListShimmer />
+        </div>
+      )}
+
+      {videos && videos.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {videos.map((v) => (
             <MovieVideoList
@@ -23,7 +33,9 @@ const MovieVideos = () => {
             />
           ))}
         </div>
-      ) : (
+      )}
+
+      {videos && videos.length === 0 && (
         <p className="text-neutral-400">No videos available</p>
       )}
     </section>

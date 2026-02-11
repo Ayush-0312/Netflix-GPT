@@ -1,12 +1,13 @@
 import { IMG_CDN_URL } from "../utils/utils/constants";
 import { useParams } from "react-router-dom";
 import useMovieDetails from "../hooks/useMovieDetails";
+import MovieDetailsShimmer from "./Shrimmers/MovieDetailsShimmer";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const movieDetails = useMovieDetails(movieId);
 
-  if (!movieDetails) return null;
+  if (!movieDetails) return <MovieDetailsShimmer />;
 
   const {
     title,

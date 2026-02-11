@@ -1,7 +1,8 @@
 import MovieCard from "./MovieCard";
+import MovieCardShimmer from "./Shrimmers/MovieCardShimmer";
 
 const MovieList = ({ title, movies }) => {
-  if (!movies) return null;
+  const isLoading = !movies || movies.length === 0;
 
   return (
     <div className="mb-6 last:mb-0">
@@ -10,13 +11,17 @@ const MovieList = ({ title, movies }) => {
       </h1>
 
       <div className="flex gap-2 md:gap-4 overflow-x-auto px-4 md:px-10 pb-2 scrollbar-hidden">
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movieId={movie.id}
-            posterPath={movie.poster_path}
-          />
-        ))}
+        {isLoading &&
+          [...Array(8)].map((_, id) => <MovieCardShimmer key={id} />)}
+
+        {!isLoading &&
+          movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movieId={movie.id}
+              posterPath={movie.poster_path}
+            />
+          ))}
       </div>
     </div>
   );
