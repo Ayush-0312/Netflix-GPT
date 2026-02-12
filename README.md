@@ -1,72 +1,180 @@
-# Cinemix
+# 🎬 Cinemix
 
-A smart movie recommendation platform using AI to suggest trending and personalized content.
+AI-Powered Movie Discovery Platform
 
-## live- https://cinemix.theayushgupta.in/
+🔗 **Live:** https://cinemix.theayushgupta.in
 
-- create react app
-- configured tailwindCSS
-- routing of app
-- header
-- login form
-- sign up form
-- form validation
-- useRef
-- firebase setup
-- deploying app to production
-- create sign up user account
-- implement sign in user API
-- created redux store with userSlice
-- bugFix - sign up displayName and profilePicture update
-- bugFix - if the user is not logged in redirect/ browse to login page and vice-versa
-- unsuscribed to onAuthStateChanged callback
-- add hardcoded values to constants file
-- register TMDB API & create an app & get access token
-- get data from TMDB now playing movies list API
-- setup moviesSlice
-- created custom hook "useNowPlayingMovies" to fetch data from TMDB API and update store
-- planning for MainContainer & SecondaryContainer
-- fetch data for trailer video
-- update store with trailer video data
-- embedded the youtube video and make it autoplay and mute
-- tailwindCSS to make mainContainer look cool
-- created SecondaryContainer
-- created MovieList and MovieCard
-- created different custom hooks for popular, topRated, upcoming movies
-- hid scrollbar with maintaining its functionality
-- GptSearch feature
-- GptSearchBar
-- (Feature) multi-language feature in our app
-- setup OpenAI API
-- used OpenAI API to get movie suggestions
-- reused MovieList component to display the movies
-- created env file to protect api key
-- done minor changes to stop repeated API calls
-- created movieVideos page which displays movie details and videos
-- created custom hooks to fetch movie details and movie videos
-- created movieVideoList to display movieVideos
-- created Footer
-- setup play and more info button option in main container
-- fixed favicon
-- made the app responsive to different screens
+---
 
-## Features
+## 📌 Project Summary
 
-- login / sign up
+Cinemix is a scalable, production-ready movie discovery platform that combines AI-driven recommendations with real-time movie data from TMDB.
 
-  - sign in / sign up form
-  - redirect to browse page
+The application focuses on:
 
-- Browse (after authentication)
+- Clean architecture
+- Optimized state management
+- API efficiency
+- Component reusability
+- UX polish & responsiveness
+- Scalable routing structure
 
-  - Header
-  - main movie
-    - trailer in bg
-    - title & description
-  - movie suggestion
-    - movieList \* n
+---
 
-- Cinemix
+## 🏗 Architecture Overview
 
-  - search bar
-  - movie suggestions
+### 🔹 Frontend
+
+- React (Create React App)
+- Redux Toolkit for centralized state management
+- React Router for dynamic routing
+- Tailwind CSS for utility-first styling
+
+### 🔹 Backend
+
+- Firebase Authentication (Auth & session management)
+- TMDB API (Movie metadata & videos)
+- Google Gemini API (AI-powered recommendations)
+
+---
+
+## 🧠 Engineering Highlights
+
+### 1️⃣ Centralized State Management
+
+- Implemented Redux Toolkit slices for:
+  - User authentication state
+  - Movies & video caching
+  - GPT search results
+- Reduced redundant API calls using store-based caching strategy.
+- Used dynamic maps (`movieVideosMap`) for scalable video data storage.
+
+---
+
+### 2️⃣ Custom Hooks Architecture
+
+Abstracted data fetching logic into reusable hooks:
+
+- `useNowPlayingMovies`
+- `usePopularMovies`
+- `useTopRatedMovies`
+- `useUpcomingMovies`
+- `useMovieDetails`
+- `useMovieVideos`
+
+This ensures:
+
+- Separation of concerns
+- Reusable logic
+- Cleaner UI components
+- Easier scalability
+
+---
+
+### 3️⃣ Dynamic Routing System
+
+Routes handled using a layout-based architecture:
+
+- `/` → Login
+- `/browse` → Main Dashboard
+- `/ai` → AI Search
+- `/movie/:movieId` → Dynamic Movie Page
+
+Implemented:
+
+- Scroll-to-top behavior on route change
+- Protected route logic
+- Redirect logic based on auth state
+
+---
+
+### 4️⃣ Performance Optimizations
+
+- API result caching via Redux
+- Reduced duplicate fetch calls
+- Shimmer UI for perceived performance improvement
+- Optimized scroll behavior
+- Efficient conditional rendering for loading states
+
+---
+
+### 5️⃣ UI/UX Engineering
+
+- Responsive design for mobile & desktop
+- Shimmer loading placeholders
+- Splash screen boot animation
+- Smooth navigation transitions
+- Hidden scrollbars while maintaining scroll functionality
+
+---
+
+## 🔐 Authentication Flow
+
+- Firebase email/password authentication
+- Session persistence via `onAuthStateChanged`
+- Auto-redirect logic:
+  - Unauthenticated users → `/`
+  - Authenticated users → `/browse`
+- Profile updates on signup
+
+---
+
+## 🤖 AI Recommendation Flow
+
+1. User enters query.
+2. Gemini API generates 5 movie suggestions.
+3. TMDB API searches each suggestion.
+4. Results are mapped into reusable `MovieList` components.
+5. Stored in Redux to prevent re-fetching.
+
+---
+
+## 🛠 Technical Stack
+
+| Layer      | Technology    |
+| ---------- | ------------- |
+| UI         | React         |
+| State      | Redux Toolkit |
+| Styling    | Tailwind CSS  |
+| Routing    | React Router  |
+| Auth       | Firebase      |
+| API        | TMDB          |
+| AI         | Google Gemini |
+| Deployment | Vercel        |
+
+---
+
+## 📊 Feature Breakdown
+
+### 🔐 Authentication
+
+- Sign up / Sign in
+- Protected routes
+- Session persistence
+
+### 🎥 Browse Page
+
+- Hero trailer autoplay (muted)
+- Movie categories (Now Playing, Popular, Top Rated, Upcoming)
+- Horizontal carousel UI
+
+### 🎬 Movie Page
+
+- Dynamic movie details
+- Embedded YouTube trailers
+- Cached video results
+
+### 🤖 AI Search
+
+- Multi-language support
+- AI-powered movie suggestions
+- Reusable result components
+
+---
+
+## 👨‍💻 Author
+
+### Ayush Gupta
+
+- Portfolio: https://theayushgupta.in
+- GitHub: https://github.com/Ayush-0312
