@@ -7,8 +7,12 @@ import GptSearchPage from "./components/GptSearchPage";
 import ErrorPage from "./components/ErrorPage";
 import Layout from "./components/Layout";
 import MoviePage from "./components/MoviePage";
+import { useEffect, useState } from "react";
+import SplashScreen from "./components/UI_UX/SplashScreen";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -22,6 +26,16 @@ function App() {
       ],
     },
   ]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <SplashScreen />;
 
   return (
     <Provider store={appStore}>

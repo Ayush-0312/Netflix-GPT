@@ -10,7 +10,7 @@ const MovieList = ({ title, movies }) => {
         {title}
       </h1>
 
-      <div className="flex gap-2 md:gap-4 overflow-x-auto px-4 md:px-10 pb-2 scrollbar-hidden">
+      <div className="flex gap-2 md:gap-4 overflow-x-auto px-4 md:px-10 pb-2">
         {isLoading &&
           [...Array(8)].map((_, id) => <MovieCardShimmer key={id} />)}
 

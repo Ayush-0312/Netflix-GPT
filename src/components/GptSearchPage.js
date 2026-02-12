@@ -4,15 +4,15 @@ import { BG_IMG } from "../utils/utils/constants";
 
 const GptSearchPage = () => {
   return (
-    <div className="relative min-h-screen text-neutral-50">
-      <div className="fixed inset-0 -z-10">
-        <img className="w-full h-full object-cover" src={BG_IMG} alt="bg" />
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-      </div>
-
-      <div className="pt-40 md:pt-32 flex flex-col items-center px-4">
-        <GptSearchBar />
-        <GptMovieSuggestions />
+    <div
+      className="min-h-[100svh] text-neutral-50 bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: `url(${BG_IMG})` }}
+    >
+      <div className="min-h-[100svh] bg-black/70 backdrop-blur-sm">
+        <div className="pt-32 px-4 pb-20 flex flex-col items-center">
+          <GptSearchBar />
+          <GptMovieSuggestions />
+        </div>
       </div>
     </div>
   );

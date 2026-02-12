@@ -101,13 +101,15 @@ const GptSearchBar = () => {
         />
 
         <button
-          className="px-4 py-2 bg-red-700 hover:bg-red-600 text-neutral-50 font-semibold rounded-lg flex items-center justify-center whitespace-nowrap text-sm md:text-base"
+          className="px-4 py-2 bg-red-700 hover:bg-red-600 text-neutral-50 font-semibold rounded-lg flex items-center justify-center whitespace-nowrap text-sm md:text-base relative"
           onClick={handleGptSearchClick}
         >
-          {loading ? (
-            <div className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></div>
-          ) : (
-            lang[langKey]?.search
+          <span className={loading ? "invisible" : ""}>
+            {lang[langKey]?.search}
+          </span>
+
+          {loading && (
+            <div className="absolute w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></div>
           )}
         </button>
       </form>
