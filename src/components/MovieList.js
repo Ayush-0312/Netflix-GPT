@@ -1,3 +1,4 @@
+import React from "react";
 import MovieCard from "./MovieCard";
 import MovieCardShimmer from "./Shrimmers/MovieCardShimmer";
 
@@ -27,4 +28,4 @@ const MovieList = ({ title, movies }) => {
   );
 };
 
-export default MovieList;
+export default React.memo(MovieList);

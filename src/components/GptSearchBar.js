@@ -4,7 +4,6 @@ import lang from "../utils/utils/languageConstants";
 // import client from "../utils/utils/openai";
 import { API_OPTIONS } from "../utils/utils/constants";
 import { addGptMovieResult } from "../utils/utils/gptSlice";
-import { GoogleGenAI } from "@google/genai";
 
 const GptSearchBar = () => {
   const [loading, setLoading] = useState(false);
@@ -13,10 +12,6 @@ const GptSearchBar = () => {
 
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
-
-  const ai = new GoogleGenAI({
-    apiKey: process.env.REACT_APP_GEMINI_KEY,
-  });
 
   //search movie in TMDB database
   const searchMovieTMDB = async (movie) => {
@@ -32,6 +27,12 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
+    const { GoogleGenAI } = await import("@google/genai");
+
+    const ai = new GoogleGenAI({
+      apiKey: process.env.REACT_APP_GEMINI_KEY,
+    });
+
     const query = searchText?.current?.value?.trim();
 
     if (!query) {

@@ -1,3 +1,4 @@
+import React from "react";
 import { IMG_CDN_URL } from "../utils/utils/constants";
 import { Link } from "react-router-dom";
 
@@ -18,4 +19,4 @@ const MovieCard = ({ posterPath, movieId }) => {
   );
 };
 
-export default MovieCard;
+export default React.memo(MovieCard);
