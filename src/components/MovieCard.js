@@ -13,6 +13,8 @@ const MovieCard = ({ posterPath, movieId }) => {
       <img
         alt="Movie Poster"
         src={IMG_CDN_URL + posterPath}
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover rounded-sm transition-opacity duration-300"
       />
     </Link>

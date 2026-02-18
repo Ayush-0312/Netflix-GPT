@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../utils/utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, removeUser } from "../utils/utils/userSlice";
+import { addUser } from "../utils/utils/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utils/utils/constants";
 import { changeLanguage } from "../utils/utils/configSlice";
+import { RESET_STORE } from "../utils/utils/actions";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Header = () => {
         }
       } else {
         // User is signed out
-        dispatch(removeUser());
+        dispatch({ type: RESET_STORE });
         if (location.pathname !== "/") {
           navigate("/");
         }
